@@ -1,7 +1,6 @@
 -module(episode_1).
 
 -export([
-    none_if_odd/1,
     option/3,
     is_some/1,
     is_nothing/1,
@@ -23,10 +22,6 @@
 % Implemented all of https://hackage.haskell.org/package/base-4.18.0.0/docs/Data-Maybe.html
 
 -type option(A) :: none | {some, A}.
-
--spec none_if_odd(integer()) -> option(integer()).
-none_if_odd(X) when is_number(X), X rem 2 =:= 0 -> {some, X};
-none_if_odd(_) -> none.
 
 -spec option(A, fun((A) -> B), option(A)) -> B.
 option(_Default, F, {some, X}) -> F(X);
