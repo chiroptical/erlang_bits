@@ -15,4 +15,4 @@ cat_options_test() ->
     [0, 1, 2] = episode_1:cat_options([{some, 0}, none, {some, 1}, none, {some, 2}]).
 
 map_option_test() ->
-    [0, 2] = episode_1:map_option(fun episode_1:none_if_odd/1, [0, 1, 2, 3]).
+    [0, 2] = episode_1:map_option(fun none_if_odd/1, [0, 1, 2, 3]).
