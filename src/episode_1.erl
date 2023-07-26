@@ -3,9 +3,9 @@
 -export([
     option/3,
     is_some/1,
-    is_nothing/1,
-    from_just/1,
-    from_maybe/2,
+    is_none/1,
+    from_some/1,
+    from_option/2,
     option_to_list/1,
     list_to_option/1,
     cat_options/1,
@@ -31,17 +31,17 @@ option(Default, _F, _) -> Default.
 is_some({some, _}) -> true;
 is_some(_) -> false.
 
--spec is_nothing(option(_)) -> boolean().
-is_nothing(none) -> true;
-is_nothing(_) -> false.
+-spec is_none(option(_)) -> boolean().
+is_none(none) -> true;
+is_none(_) -> false.
 
--spec from_just(option(A)) -> option(A) | no_return().
-from_just({some, X}) -> X;
-from_just(_) -> throw({is_none, "Expected some, got none"}).
+-spec from_some(option(A)) -> option(A) | no_return().
+from_some({some, X}) -> X;
+from_some(_) -> throw({is_none, "Expected some, got none"}).
 
--spec from_maybe(A, option(A)) -> A.
-from_maybe(_Default, {some, X}) -> X;
-from_maybe(Default, _) -> Default.
+-spec from_option(A, option(A)) -> A.
+from_option(_Default, {some, X}) -> X;
+from_option(Default, _) -> Default.
 
 -spec option_to_list(option(A)) -> list(A).
 option_to_list({some, X}) -> [X];
