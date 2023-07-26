@@ -1,3 +1,5 @@
+[![.github/workflows/ci.yaml](https://github.com/chiroptical/erlang_bits/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/chiroptical/erlang_bits/actions/workflows/ci.yaml)
+
 erlang_bits
 =====
 
