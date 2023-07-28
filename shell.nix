@@ -1,5 +1,4 @@
 {pkgs, ...}:
-
 pkgs.mkShell {
   buildInputs = with pkgs; [
     # nix tools
