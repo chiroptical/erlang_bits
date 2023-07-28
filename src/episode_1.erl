@@ -2,6 +2,8 @@
 
 -export([
     option/3,
+    map/2,
+    combine/3,
     is_some/1,
     is_none/1,
     from_some/1,
@@ -22,6 +24,16 @@
 % Implemented all of https://hackage.haskell.org/package/base-4.18.0.0/docs/Data-Maybe.html
 
 -type option(A) :: none | {some, A}.
+
+-spec map(fun((A) -> B), option(A)) -> option(B).
+map(F, {some, X}) -> {some, F(X)};
+map(_F, _) -> none.
+
+-spec combine(fun((A, A) -> A), option(A), option(A)) -> option(A).
+combine(F, {some, X}, {some, Y}) -> {some, F(X, Y)};
+combine(_F, {some, X}, _) -> {some, X};
+combine(_F, _, {some, X}) -> {some, X};
+combine(_F, _, _) -> none.
 
 -spec option(A, fun((A) -> B), option(A)) -> B.
 option(_Default, F, {some, X}) -> F(X);

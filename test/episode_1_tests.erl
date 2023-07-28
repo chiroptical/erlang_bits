@@ -2,7 +2,7 @@
 -include_lib("eunit/include/eunit.hrl").
 
 -spec none_if_odd(integer()) -> episode_1:option(integer()).
-none_if_odd(X) when is_number(X), X rem 2 =:= 0 -> {some, X};
+none_if_odd(X) when X rem 2 =:= 0 -> {some, X};
 none_if_odd(_) -> none.
 
 works_if_even_test() ->
