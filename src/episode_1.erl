@@ -25,27 +25,27 @@
 
 -spec option(A, fun((A) -> B), option(A)) -> B.
 option(_Default, F, {some, X}) -> F(X);
-option(Default, _F, _) -> Default.
+option(Default, _F, none) -> Default.
 
 -spec is_some(option(_)) -> boolean().
 is_some({some, _}) -> true;
-is_some(_) -> false.
+is_some(none) -> false.
 
 -spec is_none(option(_)) -> boolean().
 is_none(none) -> true;
-is_none(_) -> false.
+is_none({some, _}) -> false.
 
 -spec from_some(option(A)) -> option(A) | no_return().
 from_some({some, X}) -> X;
-from_some(_) -> throw({is_none, "Expected some, got none"}).
+from_some(none) -> throw({is_none, "Expected some, got none"}).
 
 -spec from_option(A, option(A)) -> A.
 from_option(_Default, {some, X}) -> X;
-from_option(Default, _) -> Default.
+from_option(Default, none) -> Default.
 
 -spec option_to_list(option(A)) -> list(A).
 option_to_list({some, X}) -> [X];
-option_to_list(_) -> [].
+option_to_list(none) -> [].
 
 -spec list_to_option(list(A)) -> option(A).
 list_to_option([X]) -> {some, X};
