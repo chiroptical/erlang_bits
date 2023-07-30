@@ -21,19 +21,11 @@
 
 % Type Reference: https://www.erlang.org/doc/reference_manual/typespec.html
 
-% Implemented all of https://hackage.haskell.org/package/base-4.18.0.0/docs/Data-Maybe.html
-
 -type option(A) :: none | {some, A}.
 
 -spec map(fun((A) -> B), option(A)) -> option(B).
 map(F, {some, X}) -> {some, F(X)};
 map(_F, _) -> none.
-
--spec combine(fun((A, A) -> A), option(A), option(A)) -> option(A).
-combine(F, {some, X}, {some, Y}) -> {some, F(X, Y)};
-combine(_F, {some, X}, _) -> {some, X};
-combine(_F, _, {some, X}) -> {some, X};
-combine(_F, _, _) -> none.
 
 -spec option(A, fun((A) -> B), option(A)) -> B.
 option(_Default, F, {some, X}) -> F(X);
@@ -46,6 +38,8 @@ is_some(none) -> false.
 -spec is_none(option(_)) -> boolean().
 is_none(none) -> true;
 is_none({some, _}) -> false.
+
+% Implemented all of https://hackage.haskell.org/package/base-4.18.0.0/docs/Data-Maybe.html
 
 -spec from_some(option(A)) -> option(A) | no_return().
 from_some({some, X}) -> X;
@@ -81,3 +75,10 @@ map_option(Fun, [X | Rest]) ->
             io:format("~p~n", [X]),
             map_option(Fun, Rest)
     end.
+
+-spec combine(fun((A, A) -> A), option(A), option(A)) -> option(A).
+combine(F, {some, X}, {some, Y}) -> {some, F(X, Y)};
+combine(_F, {some, X}, _) -> {some, X};
+combine(_F, _, {some, X}) -> {some, X};
+combine(_F, _, _) -> none.
+
