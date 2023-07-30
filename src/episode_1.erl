@@ -81,4 +81,3 @@ combine(F, {some, X}, {some, Y}) -> {some, F(X, Y)};
 combine(_F, {some, X}, _) -> {some, X};
 combine(_F, _, {some, X}) -> {some, X};
 combine(_F, _, _) -> none.
-
