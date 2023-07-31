@@ -25,7 +25,7 @@
 
 -spec map(fun((A) -> B), option(A)) -> option(B).
 map(F, {some, X}) -> {some, F(X)};
-map(_F, _) -> none.
+map(_F, none) -> none.
 
 -spec option(A, fun((A) -> B), option(A)) -> B.
 option(_Default, F, {some, X}) -> F(X);
