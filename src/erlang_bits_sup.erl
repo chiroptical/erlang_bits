@@ -32,6 +32,9 @@ init([]) ->
         period => 1
     },
     ChildSpecs = [],
+    % ChildSpecs = [#{ id => episode_3_server,
+    %                  start => {episode_3, start_link, []}
+    %                }],
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions

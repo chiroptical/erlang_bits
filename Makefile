@@ -8,6 +8,8 @@ format:
 check:
 	alejandra --check .
 	rebar3 fmt --check
+	rebar3 dialyzer
+	rebar3 gradualizer
 
 typecheck:
 	rebar3 gradualizer
