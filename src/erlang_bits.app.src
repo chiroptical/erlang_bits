@@ -5,7 +5,9 @@
     {mod, {erlang_bits_app, []}},
     {applications, [
         kernel,
-        stdlib
+        stdlib,
+        % episode_4
+        restc
     ]},
     {env, []},
     {modules, []},

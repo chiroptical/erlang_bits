@@ -33,8 +33,8 @@ init([]) ->
     },
     ChildSpecs = [
         #{
-            id => episode_3_server,
-            start => {episode_3, start_link, []}
+            id => episode_4_server,
+            start => {episode_4, start_link, []}
         }
     ],
     {ok, {SupFlags, ChildSpecs}}.
