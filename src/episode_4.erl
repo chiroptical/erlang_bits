@@ -36,14 +36,19 @@ handle_call({county, County}, _From, State = #state{api_url = ApiUrl}) ->
         }
     },
     {ok, 200, _Headers, Response} = restc:request(
+        % request method
         post,
+        % content type
         json,
+        % request URL, restc:construct_url can be useful for query parameters
         ApiUrl,
-        % return statuses accepted
+        % expected status codes
         [200],
-        % custom headers
+        % headers as proplist
         [],
+        % Automatically converted to JSON for us
         Body,
+        % options
         []
     ),
     logger:notice(#{response => Response}),
@@ -53,6 +58,9 @@ handle_call({county, County}, _From, State = #state{api_url = ApiUrl}) ->
 
     Amounts = lists:foldr(fun collect_amounts/2, maps:new(), Results),
     logger:notice(#{amounts => Amounts}),
+
+    AmountsAsBinary = maps:map(fun(_K, V) -> decimal:to_binary(V) end, Amounts),
+    logger:notice(#{as_binary => AmountsAsBinary}),
 
     {reply, Amounts, State};
 handle_call(Msg, _From, State) ->
@@ -66,4 +74,6 @@ handle_cast(Msg, State) ->
 collect_amounts(Proplist, Map) ->
     Name = proplists:get_value(<<"name">>, Proplist),
     Amount = proplists:get_value(<<"amount">>, Proplist),
-    maps:update_with(Name, fun(V) -> V + Amount end, Amount, Map).
+    Opts = #{precision => 2, rounding => round_floor},
+    AmountDecimal = decimal:to_decimal(Amount, Opts),
+    maps:update_with(Name, fun(V) -> decimal:add(V, AmountDecimal) end, AmountDecimal, Map).
