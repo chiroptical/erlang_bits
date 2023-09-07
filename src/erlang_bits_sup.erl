@@ -31,7 +31,12 @@ init([]) ->
         intensity => 0,
         period => 1
     },
-    ChildSpecs = [],
+    ChildSpecs = [
+        #{
+            id => episode_4_server,
+            start => {episode_4, start_link, []}
+        }
+    ],
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions

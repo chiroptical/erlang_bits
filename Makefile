@@ -8,10 +8,16 @@ format:
 check:
 	alejandra --check .
 	rebar3 fmt --check
-
-typecheck:
-	rebar3 gradualizer
 	rebar3 dialyzer
+	rebar3 gradualizer
+
+dialyzer:
+	rebar3 dialyzer
+
+gradualizer:
+	rebar3 gradualizer
+
+typecheck: dialyzer gradualizer
 
 test:
 	rebar3 eunit
@@ -19,4 +25,4 @@ test:
 shell:
 	rebar3 shell
 
-.PHONY: build format check typecheck test shell
+.PHONY: build format check dialyzer gradualizer typecheck test shell
