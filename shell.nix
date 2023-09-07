@@ -1,4 +1,9 @@
 {pkgs, ...}:
+
+let 
+  elp = pkgs.callPackage ./nix/elp.nix {};
+
+in
 pkgs.mkShell {
   buildInputs = with pkgs; [
     # nix tools
@@ -8,5 +13,6 @@ pkgs.mkShell {
     erlang
     rebar3
     erlang-ls
+    elp
   ];
 }
