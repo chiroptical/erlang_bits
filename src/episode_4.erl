@@ -1,9 +1,16 @@
 -module(episode_4).
 -behaviour(gen_server).
 
+% Introduce restc
 % https://github.com/kivra/restclient
-% Enable restc in erlang_bits.app.src
-% https://github.com/fedspendingtransparency/usaspending-api/blob/master/usaspending_api/api_contracts/contracts/v2/search/spending_by_category/county.md
+% Enable restc in src/erlang_bits.app.src
+%
+% https://github.com/fedspendingtransparency/usaspending-api/blob/master/usaspending_api/api_contracts/contracts/v2/search/spending_by_category/country.md
+% 1. Gather all of the data via paginated queries for a particular year
+% 2. Store that data by their code in memory for now
+% 3. Add sync function to see if the pagination is running
+% 4. Add sync function to recall information
+% Enable the server in src/erlang_bits_sup.erl
 
 -export([
     start_link/0,

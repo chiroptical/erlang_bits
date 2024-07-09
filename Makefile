@@ -25,4 +25,7 @@ test:
 shell:
 	rebar3 shell
 
-.PHONY: build format check dialyzer gradualizer typecheck test shell
+clean:
+	rebar3 clean
+
+.PHONY: build format check dialyzer gradualizer typecheck test shell clean
