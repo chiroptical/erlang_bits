@@ -20,9 +20,7 @@
   in {
     devShell = forAllSystems (
       pkgs:
-        import ./shell.nix {
-          inherit pkgs;
-        }
+        default = pkgs.callPackage ./shell.nix { };
     );
   };
 }
