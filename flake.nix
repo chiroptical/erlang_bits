@@ -18,9 +18,8 @@
         system: function nixpkgs.legacyPackages.${system}
       );
   in {
-    devShell = forAllSystems (
-      pkgs:
-        default = pkgs.callPackage ./shell.nix { };
-    );
+    devShells = forAllSystems (pkgs: {
+      default = pkgs.callPackage ./shell.nix {};
+    });
   };
 }
