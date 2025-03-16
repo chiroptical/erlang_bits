@@ -2,7 +2,7 @@ build:
 	rebar3 compile
 
 format:
-	alejandra --quiet .
+	nixfmt **.nix
 	rebar3 fmt --write
 
 check:
