@@ -20,7 +20,7 @@ pkgs.stdenv.mkDerivation {
     else
       pkgs.fetchzip {
         url = "https://github.com/WhatsApp/erlang-language-platform/releases/download/${release}/elp-linux-x86_64-unknown-linux-gnu-otp-${otp}.tar.gz";
-        sha256 = "sha256-0000000000000000000000000000000000000000000=";
+        sha256 = "sha256-UVhUUKOcZmfB8mvjpKJJBUlSEgTBQyJOV7CH9srwpD4=";
       };
 
   installPhase = ''
